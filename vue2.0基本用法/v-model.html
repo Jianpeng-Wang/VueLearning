@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<div id="wjp">
+			<input type="text" v-model="name" />
+			<div>
+				{{name}} <br/>
+				{{age}}  <br/>
+				{{isGraduate}} <br>
+				{{scores}}  <br>
+				{{wife}}
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			new Vue({
+				el:'#wjp',
+				data:{
+					name:'',  // 即使没有值也要声明
+					age:21,
+					isGraduate:false,
+					scores:[12,23,45,67],
+					wife:{name:'aa',age:20}
+				}
+			})
+		</script>
+	</body>
+</html>
