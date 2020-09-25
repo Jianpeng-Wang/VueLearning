@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="../css/bootstrap3.0.css" rel="stylesheet">
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<div class="container" id="wjp">
+			<h2 class="text-center">添加用户</h2>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="name" class="control-label col-sm-2 col-sm-offset-2">姓 名：</label>
+					<div class="col-sm-6">
+						<input type="text" autocomplete="off" class="form-control" id="name" v-model="user.name" placeholder="请输入姓名" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="age" class="control-label col-sm-2 col-sm-offset-2">年 龄：</label>
+					<div class="col-sm-6">
+						<input type="text" autocomplete="off" class="form-control" id="age" v-model="user.age" placeholder="请输入年龄" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email" class="control-label col-sm-2 col-sm-offset-2">邮 箱：</label>
+					<div class="col-sm-6">
+						<input type="text" autocomplete="off" class="form-control" id="email" v-model="user.email" placeholder="请输入邮箱" />
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button type="button" class="btn btn-success" @click="addUser">添加</button>
+					<button type="reset" class="btn btn-primary">重置</button>
+				</div>
+			</form>
+
+			<hr>
+
+			<table class="table table-bordered table-hover">
+				<caption class="h3 text-center text-info">用户列表</caption>
+				<thead>
+					<tr>
+						<th class="text-center">序号</th>
+						<th class="text-center">姓名</th>
+						<th class="text-center">年龄</th>
+						<th class="text-center">邮箱</th>
+						<th class="text-center">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(user,index) in users" class="text-center">
+						<td>{{index+1}}</td>
+						<td>{{user.name}}</td>
+						<td>{{user.age}}</td>
+						<td>{{user.email}}</td>
+						<td>
+							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#del" @click="nowIndex=index">删除</button>
+						</td>
+					</tr>
+					<tr class="text-right">
+						<td colspan="5">
+							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#del" @click="nowIndex=-1">删除所有</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- 模态框 -->
+			<div class="modal" id="del">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span>&times;</span>
+							</button>
+							<h4 class="modal-title text-danger">警告</h4>
+						</div>
+						<div class="modal-body">
+							<h5 v-if="nowIndex!=-1">确定要删除用户<span class="text-info">{{users[nowIndex]?users[nowIndex].name:''}}</span>吗？</h5>
+							<h5 v-if="nowIndex==-1">确定要删除用户吗？</h5>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal" @click="delUser">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: '#wjp',
+			data: {
+				nowIndex: -1,
+				user: {
+
+				},
+				users: [{
+						name: '唐伯虎',
+						age: 25,
+						email: '46312354@qq.com'
+					},
+					{
+						name: '秋香',
+						age: 22,
+						email: 'asdf12354@qq.com'
+					},
+					{
+						name: '石榴姐',
+						age: 24,
+						email: '463sdffw4@qq.com'
+					}
+				]
+			},
+			methods: {
+				addUser() {
+					this.users.push(this.user);
+					this.user = {};
+				},
+				delUser(){
+					if (this.nowIndex==-1) {
+						this.users = [];
+					} else{
+						this.users.splice(this.nowIndex,1);
+					}
+				}
+			}
+		});
+	</script>
+</html>
