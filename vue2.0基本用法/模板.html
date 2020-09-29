@@ -27,16 +27,22 @@
 	</head>
 	<body>
 		<div id="itany">
+			<!-- 双向绑定数据 -->
 			<input type="text" v-model="msg">
 
+			<!-- 数据加载完毕前不会显示{{}} -->
 			<h3>aaa<span v-cloak>{{msg}}</span></h3>
 
+			<!-- 文本原样输出 -->
 			<h3 v-text="msg"></h3>
 
+			<!-- 可以把HTML代码解析 -->
 			<h3 v-html="msg"></h3>
 
+			<!-- 只绑定一次数据，数据改变时这里不会变 -->
 			<h3 v-once>{{msg}}</h3>
 
+			<!-- 保留数据原格式 -->
 			<h3 v-pre>{{msg}}</h3>
 		</div>
 	</body>
