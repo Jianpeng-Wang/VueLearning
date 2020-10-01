@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+		<script src="../js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				let vm = new Vue({
+					el: '#itany',
+					data: {
+
+					},
+					methods: {
+						sendAjax() {
+							axios({
+								method: 'get',
+								url: 'data.json',
+								params: {},
+							}).then(result => {
+								console.log(result);
+							}).catch(e => {});
+						},
+						sendGet() {
+							axios.get('data.json', {
+								params: {
+
+								}
+							}).then(result => {
+								console.log(result);
+							});
+						}
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="itany">
+			<button type="button" @click="sendAjax">发送ajax请求</button>
+			<button type="button" @click="sendGet">发送get请求</button>
+		</div>
+	</body>
+</html>
